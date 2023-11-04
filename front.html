@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Neon Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(83, 118, 174);
+            color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.5s, color 0.5s; /* Transition color change */
+            font-family: 'Quicksand', sans-serif; /* Classic and professional Quicksand font */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            width: 200px;
+            height: auto;
+            cursor: pointer;
+            margin: 20px;
+            border-radius: 50%; /* Circular border */
+            border: 4px solid #39ff14; /* Neon green border */
+        }
+
+        .dark-mode {
+            background-color: black; /* Change background color to black */
+            color: #548ca5; /* Text color in dark mode */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>AIR MOUSE TEST ENVIRONMENT<br>Play with the following buttons and test the Air mouse </h1>
+    <div style="display: flex;">
+        <a href="second_page.html">
+            <img src="volume.png" onclick="navigateToSecondPage()" />
+        </a>
+        <img src="dark.png" onclick="toggleDarkMode()" />
+        <a href="https://www.amazon.com">
+            <img src="AMZ.png" />
+        </a>
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <a href="ttt.html">
+            <img src="ttt.png" style="width: 300px; height: auto; cursor: pointer; border-radius: 50%; border: 4px solid #ff7f50; margin-top: 20px;" />
+        </a>
+    </div>
+
+    <script>
+        function navigateToSecondPage() {
+            window.location.href = "second_page.html";
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
+
+</html>
