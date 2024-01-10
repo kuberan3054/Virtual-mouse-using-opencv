@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scroll Animation Test</title>
+  <style>
+    /* Your existing styles here */
+
+    /* Additional styles for the animation */
+    .scroll-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    /* Styles for animation when scrolling down */
+    .scroll-down {
+      transform: translateY(-100%);
+      animation: scrollDownAnimation 0.4s forwards;
+    }
+    /* Styles for animation when scrolling up */
+    .scroll-up {
+      transform: translateY(100%);
+      animation: scrollUpAnimation 0.4s forwards;
+    }
+    /* Keyframes for scroll animations */
+    @keyframes scrollDownAnimation {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes scrollUpAnimation {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Your existing content here -->
+  <div class="scroll-animation"></div>
+  <script>
+    window.addEventListener('scroll', function() {
+      const scrollAnimation = document.querySelector('.scroll-animation');
+      if (scrollY > 0) {
+        scrollAnimation.classList.add('scroll-up');
+      } else {
+        scrollAnimation.classList.remove('scroll-up');
+      }
+
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        scrollAnimation.classList.add('scroll-down');
+      } else {
+        scrollAnimation.classList.remove('scroll-down');
+      }
+    });
+  </script>
+</body>
+</html>
