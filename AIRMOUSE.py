@@ -61,8 +61,19 @@ while True:
                         print("scrolling down")
                         pyautogui.scroll(-150)
 
+                    elif thumb_y-ring_y > -5 and thumb_y-ring_y < 70:
+                        pyautogui.press('volumeup')
+
+                    elif thumb_y-ring_y < -5 and thumb_y-ring_y >-70:
+                        pyautogui.press('volumedown')
+
+
+
+
                     else:
                         pyautogui.moveTo(mid_x, mid_y)
+                        
+
 
 
 
@@ -71,5 +82,5 @@ while True:
     cv2.imshow('AIRMOUSE', frame)
     cv2.waitKey(1)
 '''
-1.frame size
+1.frame size [Switch taskbar to right ot left]
 '''
