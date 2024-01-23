@@ -1,19 +1,22 @@
 import cv2
 import mediapipe as mp
 import pyautogui
-#we will change it to depth camera or IP camera afterward
-cap = cv2.VideoCapture(0)
-hand_detector = mp.solutions.hands.Hands()
-drawing_utils = mp.solutions.drawing_utils
-screen_width, screen_height = pyautogui.size()
-index_x,index_y,ring_x,ring_y,mid_x,mid_y,thumb_x,thumb_y = 0,0,0,0,0,0,0,0
+
+cap = cv2.VideoCapture(0) #You can change it to IP camera but there's a latency issue!
+hand_detector = mp.solutions.hands.Hands() #This line will detect our had
+drawing_utils = mp.solutions.drawing_utils # This Draws the colors on landmarks
+screen_width, screen_height = pyautogui.size() 
+index_x,index_y,ring_x,ring_y,mid_x,mid_y,thumb_x,thumb_y = 0,0,0,0,0,0,0,0 #initial condition
+
 while True:
+    
     _, frame = cap.read()
     frame = cv2.flip(frame, 1)
     frame_height, frame_width,_= frame.shape
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) # As we all know CV2 reads in BGR format so we are changing it to RGB for processing.
     output = hand_detector.process(rgb_frame)
     hands = output.multi_hand_landmarks
+    
     if hands:
         for hand in hands:
             drawing_utils.draw_landmarks(frame, hand)
@@ -22,10 +25,12 @@ while True:
                 x = int(landmark.x*frame_width)
                 y = int(landmark.y*frame_height)
 
-                if id ==4:
+                if id ==4: # if you count the landmarks thumb finger's tip is the 4th point 
+                    
                     cv2.circle(img=frame, center=(x, y), radius=10, color=(255, 255, 255), thickness=2)
                     thumb_x  = screen_width / frame_width * x
                     thumb_y = screen_height / frame_height * y
+                    
 
                 if id == 8:
                     cv2.circle(img=frame, center=(x,y), radius=10, color=(0, 255, 0),thickness=2)
@@ -67,20 +72,16 @@ while True:
                     elif thumb_y-ring_y < -5 and thumb_y-ring_y >-70:
                         pyautogui.press('volumedown')
 
-
-
-
                     else:
                         pyautogui.moveTo(mid_x, mid_y)
                         
-
-
-
-
-
-
     cv2.imshow('AIRMOUSE', frame)
     cv2.waitKey(1)
 '''
-1.frame size [Switch taskbar to right ot left]
+note :  
+This is a very basic prototype and there are some drawbacks here
+    i) you can't access you'r taskbar unless you have you taskbar associated on left or top of your screen.
+    ii) you can't Double click or drag with this.
+    iii)This code will detect all the hands in the screen .
+    iv) you need to keep your hand straight with respect to the screen.
 '''
